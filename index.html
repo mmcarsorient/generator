@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v21 (Zbalansowany Układ Pionowy)</title>
+    <title>MM Cars - Generator Premium v22 (Perfekcyjna Wysokość Finansowania)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v21 (Poprawiony Układ Pionowy)</h1>
+    <h1>MM Cars - Generator Premium v22 (Obniżone Finansowanie)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
@@ -49,7 +49,7 @@
     </div>
 
     <!-- KROK 2: Lewy Górny Róg -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne (Podniesione z zapasem na belkę)</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne</h3>
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
             <label for="topLeft1">Rubryka góra 1:</label>
@@ -60,13 +60,13 @@
             <input type="text" id="topLeft2" value="Rocznik 2026">
         </div>
         <div>
-            <label for="topLeft3">Rubryka góra 3:</label>
+            <label pour="topLeft3">Rubryka góra 3:</label>
             <input type="text" id="topLeft3" value="4 cylindrowy">
         </div>
     </div>
 
     <!-- KROK 3: Prawa krawędź -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie (Obniżona pozycja)</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie (Mocno obniżone w dół)</h3>
     <div class="section grid-3">
         <div>
             <label for="text1">Wyróżnik 1 (Góra):</label>
@@ -180,7 +180,7 @@
 
                     const footerHeight = canvas.height * 0.10;
 
-                    // 2. NAPISY NA DOLE – MAKSYMALNIE OBNIŻONE (OTOMOTO)
+                    // 2. NAPISY NA DOLE – MAKSYMALNIE OBNIŻONE
                     ctx.fillStyle = "#ffffff";
                     ctx.font = `italic 500 ${Math.round(footerHeight * 0.35)}px 'Montserrat', sans-serif`;
                     ctx.textBaseline = "alphabetic";
@@ -204,12 +204,10 @@
                     ctx.shadowOffsetY = 0;
 
 
-                    // 3. LEWY GÓRNY RÓG – SUBTELNIE PODNIESIONY (Zostawia zapas na logo/pasek otomoto)
+                    // 3. LEWY GÓRNY RÓG (Zapas na Otomoto zachowany)
                     const topLeftWidth = canvas.width * 0.25; 
                     const topLeftHeight = canvas.height * 0.062;
                     const topLeftX = 0; 
-                    
-                    // ZMIANA: Zmiana z 0.23 na 0.18 – wyważone podniesienie, idealnie omija górny nagłówek portalu
                     let topLeftY = canvas.height * 0.18; 
                     const topLeftGap = canvas.height * 0.012;
 
@@ -240,7 +238,7 @@
                     });
 
 
-                    // 4. EMBLEMAT GWARANCJI – PRZYTULONY DO TEKSTU
+                    // 4. EMBLEMAT GWARANCJI
                     if(tCapRight !== "") {
                         const badgeGwarHeight = canvas.height * 0.068; 
                         const badgeGwarY = textYPosition - Math.round(footerHeight * 0.35) - badgeGwarHeight - (canvas.height * 0.005); 
@@ -278,11 +276,11 @@
                     }
 
 
-                    // 5. TRZY PRAWE BELKI FINANSOWE – OBNIŻONE DLA ZBALANSOWANIA PIONU
+                    // 5. TRZY PRAWE BELKI FINANSOWE – DUŻE OBNIŻENIE (ZBALANSOWANE)
                     const badgeHeight = canvas.height * 0.070; 
                     
-                    // ZMIANA: Przesunięcie w dół z 0.43 na 0.48 – wyrównuje proporcje prawej strony
-                    let startY = canvas.height * 0.48; 
+                    // ZMIANA: Przesunięcie z 0.48 na 0.55 – likwiduje lukę i przytula sekcję do dołu
+                    let startY = canvas.height * 0.55; 
                     const gap = canvas.height * 0.014;
 
                     const finTexts = [t1, t2, t3];
@@ -311,7 +309,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V21_${file.name}`;
+                    link.download = `MM_CARS_V22_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
