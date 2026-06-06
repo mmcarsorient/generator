@@ -2,11 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v29 (Korekta geometrii litery M)</title>
+    <title>MM Cars - Generator Premium v30 (Oficjalny Roboto Condensed)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Pobieramy Montserrat ze wszystkimi grubościami dla idealnego M -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <!-- Importujemy oryginalny Google Roboto Condensed w najwyższej grubości 900 (Black) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
@@ -30,7 +30,7 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v29 (Korekta litery M & Montserrat)</h1>
+    <h1>MM Cars - Generator Premium v30 (Baza: Roboto Condensed)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
@@ -181,20 +181,20 @@
 
                     const footerHeight = canvas.height * 0.10;
 
-                    // 2. STYLIZACJA STOPKI - NOWY FONT MONTSERRAT DLA IDEALNEJ LITERY M
+                    // 2. STYLIZACJA STOPKI - ZASTOSOWANIE ROBOTO CONDENSED BLACK
                     ctx.save(); 
                     
                     ctx.fillStyle = "#ffffff";
                     
-                    // Zmiana fontu na Montserrat 900 (Black) - daje ostre, głębokie i równe M schodzące do dołu
-                    const finalFontSize = Math.round(footerHeight * 0.32);
-                    ctx.font = `900 ${finalFontSize}px 'Montserrat', sans-serif`;
+                    // Używamy Roboto Condensed o wadze 900 (Black)
+                    const finalFontSize = Math.round(footerHeight * 0.35); // Delikatnie zwiększony mnożnik, bo kondensowane fonty optycznie potrzebują skali
+                    ctx.font = `900 ${finalFontSize}px 'Roboto Condensed', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // Precyzyjna wysokość dopasowana do osi Y na pliku image_013edf.jpg
+                    // Dokładne pozycjonowanie osi Y dopasowane do dołu portalu
                     const textYPosition = canvas.height - (footerHeight * 0.11);
                     const textXPosition = canvas.width - (canvas.width * 0.07);
                     
@@ -202,9 +202,9 @@
                     ctx.shadowBlur = 3;
                     ctx.shadowOffsetX = 1;
                     ctx.shadowOffsetY = 1;
-                    ctx.letterSpacing = "1.5px"; // Zwiększone światło między literami charakterystyczne dla portalu
+                    ctx.letterSpacing = "2px"; // Dodajemy charakterystyczny rozstaw znany z portalu
                     
-                    // Mechaniczne pochylenie (skew) zachowujące proporcje szerokich liter O oraz M
+                    // Pochylenie matematyczne (skew) o wektor -0.15 dający idealny kąt pochylenia
                     ctx.transform(1, 0, -0.15, 1, 0, 0);
                     
                     const skewCorrectionX = textYPosition * 0.15;
@@ -311,7 +311,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V29_${file.name}`;
+                    link.download = `MM_CARS_V30_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
