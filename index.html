@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>MM Cars - Generator Premium (Otomoto) v16</title>
+    <!-- Ładowanie czcionki Montserrat z Google Fonts dla idealnego dopasowania do Otomoto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-top: 0; }
+        .section { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #334155; }
+        input[type="text"], select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        .file-upload { border: 2px dashed #94a3b8; padding: 30px; text-align: center; background: #f8fafc; border-radius: 6px; cursor: pointer; margin-top: 15px; }
+        .file-upload:hover { background: #f1f5f9; border-color: #64748b; }
+        button { background: #0b192c; color: white; border: none; padding: 15px 25px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 20px; transition: background 0.2s; }
+        button:hover { background: #1e3a8a; }
+        #previewContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+        .preview-box { border: 1px solid #e2e8f0; padding: 5px; background: #fff; border-radius: 4px; text-align: center; }
+        .preview-box img { max-width: 100%; height: auto; border-radius: 2px; }
+        .status { margin-top: 15px; padding: 10px; border-radius: 6px; display: none; font-weight: bold; text-align: center; }
+        .success { background: #dcfce7; color: #15803d; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>MM Cars - Generator Premium v16 (Dopasowanie do czcionki Otomoto)</h1>
+    
+    <!-- KROK 1: Dolny pasek -->
+    <h3 style="color: #1e293b; margin-bottom: 10px;">1. Dolny pasek (Czcionka stylizowana na Otomoto, obniżona linia tekstu)</h3>
+    <div class="section grid-3">
+        <div>
+            <label for="dealerInput">Dealer:</label>
+            <input type="text" id="dealerInput" value="MM Cars">
+        </div>
+        <div>
+            <label for="brandInput">Środek paska:</label>
+            <input type="text" id="brandInput" value="Suzuki">
+        </div>
+        <div>
+            <label for="locationInput">Lokalizacja:</label>
+            <input type="text" id="locationInput" value="Katowice">
+        </div>
+    </div>
+
+    <!-- KROK 2: Lewy Górny Róg -->
+    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Trzy rubryki wyposażenia</h3>
+    <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
+        <div>
+            <label for="topLeft1">Rubryka lewa góra 1:</label>
+            <input type="text" id="topLeft1" value="Klimatyzacja 2 strefowa">
+        </div>
+        <div>
+            <label for="topLeft2">Rubryka lewa góra 2:</label>
+            <input type="text" id="topLeft2" value="Rocznik 2026">
+        </div>
+        <div>
+            <label for="topLeft3">Rubryka lewa góra 3:</label>
+            <input type="text" id="topLeft3" value="4 cylindrowy">
+        </div>
+    </div>
+
+    <!-- KROK 3: Prawa krawędź -->
+    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Trzy rubryki finansowe</h3>
+    <div class="section grid-3">
+        <div>
+            <label for="text1">Wyróżnik 1 (Góra):</label>
+            <input type="text" id="text1" value="Kredyt 50/50">
+        </div>
+        <div>
+            <label for="text2">Wyróżnik 2 (Środek):</label>
+            <input type="text" id="text2" value="Kredyt 3x33%">
+        </div>
+        <div>
+            <label for="text3">Wyróżnik 3 (Dół):</label>
+            <input type="text" id="text3" value="Leasing 100,2%">
+        </div>
+    </div>
+
+    <!-- KROK 4: Kapsuła Gwarancji -->
+    <h3 style="color: #1e293b; margin-bottom: 10px;">4. Kapsuła Gwarancyjna</h3>
+    <div class="section grid-3">
+        <div>
+            <label for="capsuleLeft">Kapsuła - Lewy tekst:</label>
+            <input type="text" id="capsuleLeft" value="SUZUKI">
+        </div>
+        <div>
+            <label for="capsuleRight">Kapsuła - Prawy tekst:</label>
+            <input type="text" id="capsuleRight" value="DO 10 LAT GWARANCJI +">
+        </div>
+        <div>
+            <label for="badgeColor">Kolor wyróżnika kapsuły:</label>
+            <select id="badgeColor">
+                <option value="YELLOW">Żółty (Styl Suzuki)</option>
+                <option value="GRAFIT">Grafitowy (Premium / Inne marki)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- KROK 5: Pliki -->
+    <div class="section">
+        <label>5. Wgraj zdjęcia samochodów:</label>
+        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+            <strong style="color: #475569;">Przeciągnij zdjęcia tutaj lub kliknij, aby wybrać z dysku</strong>
+            <input type="file" id="fileInput" multiple accept="image/*" style="display:none;" onchange="handleFiles(this.files)">
+        </div>
+    </div>
+
+    <div id="statusBox" class="status"></div>
+    <div id="previewContainer"></div>
+
+    <button id="processBtn" onclick="processImages()">GENERUJ CAŁĄ SERIĘ ZDJĘĆ</button>
+</div>
+
+<script>
+    let uploadedFiles = [];
+
+    function handleFiles(files) {
+        uploadedFiles = Array.from(files);
+        const container = document.getElementById('previewContainer');
+        container.innerHTML = '';
+        
+        uploadedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const box = document.createElement('div');
+                box.className = 'preview-box';
+                box.innerHTML = `<img src="${e.target.result}">`;
+                container.appendChild(box);
+            }
+            reader.readAsDataURL(file);
+        });
+        
+        const statusBox = document.getElementById('statusBox');
+        statusBox.className = "status success";
+        statusBox.innerText = `Wczytano zdjęć: ${files.length}`;
+    }
+
+    function processImages() {
+        if(uploadedFiles.length === 0) {
+            alert('Wgraj najpierw zdjęcia!');
+            return;
+        }
+
+        const dealer = document.getElementById('dealerInput').value.trim();
+        const markaPasek = document.getElementById('brandInput').value.trim();
+        const miasto = document.getElementById('locationInput').value.trim();
+
+        const tl1 = document.getElementById('topLeft1').value;
+        const tl2 = document.getElementById('topLeft2').value;
+        const tl3 = document.getElementById('topLeft3').value;
+
+        const t1 = document.getElementById('text1').value;
+        const t2 = document.getElementById('text2').value;
+        const t3 = document.getElementById('text3').value;
+        
+        const tCapLeft = document.getElementById('capsuleLeft').value.trim();
+        const tCapRight = document.getElementById('capsuleRight').value.trim();
+        const kolorKapsuly = document.getElementById('badgeColor').value;
+
+        uploadedFiles.forEach((file) => {
+            const imgReader = new FileReader();
+            imgReader.onload = function(event) {
+                const carImg = new Image();
+                carImg.src = event.target.result;
+                
+                carImg.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = carImg.width;
+                    canvas.height = carImg.height;
+
+                    // 1. Rysowanie tła (auto)
+                    ctx.drawImage(carImg, 0, 0);
+
+                    const footerHeight = canvas.height * 0.10;
+                    const footerY = canvas.height - footerHeight;
+
+                    // 2. DOLNY PASEK Z GRADIENTEM
+                    const gradient = ctx.createLinearGradient(0, footerY, canvas.width, canvas.height);
+                    gradient.addColorStop(0, "#08162b"); 
+                    gradient.addColorStop(0.5, "#122b54"); 
+                    gradient.addColorStop(1, "#030814"); 
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, footerY, canvas.width, footerHeight);
+
+                    ctx.fillStyle = "#ffffff";
+                    
+                    // ZMIANA CZCIONKI: Zastosowanie geometrycznego 'Montserrat' dla dopasowania do logotypu Otomoto
+                    ctx.font = `900 ${Math.round(footerHeight * 0.40)}px 'Montserrat', sans-serif`;
+                    
+                    // Zmiana wyrównania bazowego na 'alphabetic' dla precyzyjnego pozycjonowania od dołu
+                    ctx.textBaseline = "alphabetic";
+                    ctx.textAlign = "right"; 
+                    
+                    const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
+                    
+                    // OBNIŻENIE PASKA: Przesunięcie tekstu niżej (na wysokość 28% od dołu paska), by zrównać go ze znakiem Otomoto
+                    const textYPosition = canvas.height - (footerHeight * 0.28);
+                    ctx.fillText(footerText, canvas.width - (canvas.width * 0.04), textYPosition);
+
+
+                    // 3. LEWY GÓRNY RÓG (Zostaje w Segoe UI dla czytelności danych technicznych)
+                    const topLeftWidth = canvas.width * 0.25; 
+                    const topLeftHeight = canvas.height * 0.062;
+                    const topLeftX = 0; 
+                    let topLeftY = canvas.height * 0.15; 
+                    const topLeftGap = canvas.height * 0.012;
+
+                    const leftTexts = [tl1, tl2, tl3];
+                    leftTexts.forEach(text => {
+                        if(text.trim() !== "") {
+                            ctx.fillStyle = "rgba(8, 22, 43, 0.85)";
+                            ctx.beginPath();
+                            ctx.roundRect(topLeftX, topLeftY, topLeftWidth, topLeftHeight, [0, canvas.height * 0.008, canvas.height * 0.008, 0]);
+                            ctx.fill();
+
+                            ctx.fillStyle = "#ffffff";
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            
+                            let fontSize = Math.round(topLeftHeight * 0.55);
+                            ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
+                            
+                            const maxTextWidth = topLeftWidth - 30; 
+                            while (ctx.measureText(text).width > maxTextWidth && fontSize > 10) {
+                                fontSize--;
+                                ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
+                            }
+                            
+                            ctx.fillText(text, topLeftX + (topLeftWidth / 2), topLeftY + (topLeftHeight / 2));
+                            topLeftY += topLeftHeight + topLeftGap;
+                        }
+                    });
+
+
+                    // 4. EMBLEMAT GWARANCJI (Obniżony delikatnie, bliżej dolnego paska)
+                    if(tCapRight !== "") {
+                        const badgeGwarHeight = canvas.height * 0.068; 
+                        // Zmniejszono margines od dolnego paska z 0.015 na 0.008 dla lepszej kompozycji z obniżonym tekstem
+                        const badgeGwarY = footerY - badgeGwarHeight - (canvas.height * 0.008); 
+                        
+                        ctx.font = `900 ${Math.round(badgeGwarHeight * 0.46)}px 'Segoe UI', Arial, sans-serif`;
+                        ctx.textBaseline = "middle";
+                        
+                        const textLeftWidth = ctx.measureText(`  ${tCapLeft}  `).width + 30;
+                        const textRightWidth = ctx.measureText(`  ${tCapRight}  `).width + 35;
+                        
+                        const totalGwarWidth = textLeftWidth + textRightWidth;
+                        const startGwarX = canvas.width - totalGwarWidth - (canvas.width * 0.03); 
+
+                        if (kolorKapsuly === "YELLOW") {
+                            ctx.fillStyle = "#ebd600"; 
+                        } else {
+                            ctx.fillStyle = "#334155"; 
+                        }
+                        
+                        ctx.beginPath();
+                        ctx.roundRect(startGwarX, badgeGwarY, textLeftWidth + 15, badgeGwarHeight, [badgeGwarHeight/2, 0, 0, badgeGwarHeight/2]);
+                        ctx.fill();
+
+                        ctx.fillStyle = (kolorKapsuly === "YELLOW") ? "#111111" : "#ffffff";
+                        ctx.textAlign = "left";
+                        ctx.fillText(tCapLeft, startGwarX + 25, badgeGwarY + (badgeGwarHeight / 2));
+
+                        ctx.fillStyle = "#0a0a0a";
+                        ctx.beginPath();
+                        ctx.roundRect(startGwarX + textLeftWidth, badgeGwarY, textRightWidth, badgeGwarHeight, [0, badgeGwarHeight/2, badgeGwarHeight/2, 0]);
+                        ctx.fill();
+
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillText(tCapRight, startGwarX + textLeftWidth + 15, badgeGwarY + (badgeGwarHeight / 2));
+                    }
+
+
+                    // 5. TRZY PRAWE BELKI FINANSOWE
+                    const badgeWidth = canvas.width * 0.25; 
+                    const badgeHeight = canvas.height * 0.070; 
+                    const startX = canvas.width - badgeWidth; 
+                    
+                    let startY = canvas.height * 0.43; 
+                    const gap = canvas.height * 0.014;
+
+                    const finTexts = [t1, t2, t3];
+
+                    finTexts.forEach(text => {
+                        if(text.trim() !== "") {
+                            ctx.fillStyle = "rgba(8, 22, 43, 0.85)"; 
+                            ctx.beginPath();
+                            ctx.roundRect(startX, startY, badgeWidth, badgeHeight, [canvas.height * 0.010, 0, 0, canvas.height * 0.010]);
+                            ctx.fill();
+
+                            ctx.fillStyle = "#ffffff";
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            
+                            let fontSize = Math.round(badgeHeight * 0.55);
+                            ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
+                            
+                            const maxTextWidth = badgeWidth - 30;
+                            while (ctx.measureText(text).width > maxTextWidth && fontSize > 10) {
+                                fontSize--;
+                                ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
+                            }
+
+                            ctx.fillText(text, startX + (badgeWidth / 2), startY + (badgeHeight / 2));
+                            startY += badgeHeight + gap;
+                        }
+                    });
+
+                    // 6. Eksport pliku
+                    const link = document.createElement('a');
+                    link.download = `MM_CARS_V16_${file.name}`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.94);
+                    link.click();
+                };
+            };
+            imgReader.readAsDataURL(file);
+        });
+    }
+</script>
+
+</body>
+</html>
