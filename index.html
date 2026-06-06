@@ -2,11 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v28 (Perfekcyjne wyrównanie i geometria)</title>
+    <title>MM Cars - Generator Premium v29 (Korekta geometrii litery M)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Pobieramy Archivo Black - jeden z najpotężniejszych geometrycznych fontów -->
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <!-- Pobieramy Montserrat ze wszystkimi grubościami dla idealnego M -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
@@ -30,7 +30,7 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v28 (Korekta Pozycji i Czcionki)</h1>
+    <h1>MM Cars - Generator Premium v29 (Korekta litery M & Montserrat)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
@@ -181,20 +181,20 @@
 
                     const footerHeight = canvas.height * 0.10;
 
-                    // 2. NOWE POZYCJONOWANIE I INTEGRACJA GEOMETRYCZNA STOPKI
-                    ctx.save(); // Zapisujemy stan canvas do transformacji pochylenia
+                    // 2. STYLIZACJA STOPKI - NOWY FONT MONTSERRAT DLA IDEALNEJ LITERY M
+                    ctx.save(); 
                     
                     ctx.fillStyle = "#ffffff";
                     
-                    // KOREKTA CZCIONKI: Przechodzimy na ultrawymiarowy Archivo Black / Arial Black
-                    const finalFontSize = Math.round(footerHeight * 0.33);
-                    ctx.font = `${finalFontSize}px 'Archivo Black', 'Arial Black', sans-serif`;
+                    // Zmiana fontu na Montserrat 900 (Black) - daje ostre, głębokie i równe M schodzące do dołu
+                    const finalFontSize = Math.round(footerHeight * 0.32);
+                    ctx.font = `900 ${finalFontSize}px 'Montserrat', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // KOREKTA WYSOKOŚCI: Zmieniamy mnożnik z 0.16 na 0.11, aby obniżyć tekst kosmetcznie w dół (wyrównanie do Otomoto na image_01467f.jpg)
+                    // Precyzyjna wysokość dopasowana do osi Y na pliku image_013edf.jpg
                     const textYPosition = canvas.height - (footerHeight * 0.11);
                     const textXPosition = canvas.width - (canvas.width * 0.07);
                     
@@ -202,21 +202,18 @@
                     ctx.shadowBlur = 3;
                     ctx.shadowOffsetX = 1;
                     ctx.shadowOffsetY = 1;
-                    ctx.letterSpacing = "1px";
+                    ctx.letterSpacing = "1.5px"; // Zwiększone światło między literami charakterystyczne dla portalu
                     
-                    // TRANSFORMCJA POCHYLENIA (SKEW): Symulujemy idealne pochylenie logotypu bez niszczenia geometrii liter O i M
-                    // Parametr -0.15 odpowiada kątowi pochylenia oryginalnego znaku
+                    // Mechaniczne pochylenie (skew) zachowujące proporcje szerokich liter O oraz M
                     ctx.transform(1, 0, -0.15, 1, 0, 0);
                     
-                    // Ponieważ transformacja przesuwa układ współrzędnych, korygujemy punkt wstawienia X
                     const skewCorrectionX = textYPosition * 0.15;
-                    
                     ctx.fillText(footerText, textXPosition + skewCorrectionX, textYPosition);
                     
-                    ctx.restore(); // Przywracamy czysty układ dla pozostałych elementów (żeby lewe i prawe belki nie były krzywe!)
+                    ctx.restore();
 
 
-                    // 3. LEWY GÓRNY RÓG (Pozycje v23)
+                    // 3. LEWY GÓRNY RÓG
                     const topLeftHeight = canvas.height * 0.062;
                     const topLeftX = 0; 
                     let topLeftY = canvas.height * 0.14; 
@@ -245,10 +242,9 @@
                     });
 
 
-                    // 4. EMBLEMAT GWARANCJI (Pozycje v23)
+                    // 4. EMBLEMAT GWARANCJI
                     if(tCapRight !== "") {
                         const badgeGwarHeight = canvas.height * 0.068; 
-                        // Pozycja relatywna do bazowej wysokości tekstu dolnego przed obniżeniem, aby zachować dystans
                         const badgeGwarY = (canvas.height - (footerHeight * 0.16)) - Math.round(footerHeight * 0.35) - badgeGwarHeight - (canvas.height * 0.005); 
                         
                         ctx.font = `900 ${Math.round(badgeGwarHeight * 0.46)}px 'Segoe UI', Arial, sans-serif`;
@@ -284,7 +280,7 @@
                     }
 
 
-                    // 5. TRZY PRAWE BELKI FINANSOWE (Pozycje v23)
+                    // 5. TRZY PRAWE BELKI FINANSOWE
                     const badgeHeight = canvas.height * 0.070; 
                     let startY = canvas.height * 0.55; 
                     const gap = canvas.height * 0.014;
@@ -315,7 +311,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V28_${file.name}`;
+                    link.download = `MM_CARS_V29_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
