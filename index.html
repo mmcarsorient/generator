@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v22 (Perfekcyjna Wysokość Finansowania)</title>
+    <title>MM Cars - Generator Premium v23 (Dynamiczny i Zbalansowany Układ)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v22 (Obniżone Finansowanie)</h1>
+    <h1>MM Cars - Generator Premium v23 (Responsywne Tła i Nowy Balans)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
@@ -49,7 +49,7 @@
     </div>
 
     <!-- KROK 2: Lewy Górny Róg -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne (Podniesione, Responsywne Tła)</h3>
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
             <label for="topLeft1">Rubryka góra 1:</label>
@@ -60,13 +60,13 @@
             <input type="text" id="topLeft2" value="Rocznik 2026">
         </div>
         <div>
-            <label pour="topLeft3">Rubryka góra 3:</label>
+            <label for="topLeft3">Rubryka góra 3:</label>
             <input type="text" id="topLeft3" value="4 cylindrowy">
         </div>
     </div>
 
     <!-- KROK 3: Prawa krawędź -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie (Mocno obniżone w dół)</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie (Dalsze obniżenie pozycji)</h3>
     <div class="section grid-3">
         <div>
             <label for="text1">Wyróżnik 1 (Góra):</label>
@@ -204,35 +204,36 @@
                     ctx.shadowOffsetY = 0;
 
 
-                    // 3. LEWY GÓRNY RÓG (Zapas na Otomoto zachowany)
-                    const topLeftWidth = canvas.width * 0.25; 
+                    // 3. LEWY GÓRNY RÓG – WYŻEJ, RESPONSYWNIE I Z ZAPASEM NA OTOMOTO
                     const topLeftHeight = canvas.height * 0.062;
                     const topLeftX = 0; 
-                    let topLeftY = canvas.height * 0.18; 
+                    
+                    // ZMIANA: Podniesienie punktu startowego z 0.18 na 0.14
+                    let topLeftY = canvas.height * 0.14; 
                     const topLeftGap = canvas.height * 0.012;
 
                     const leftTexts = [tl1, tl2, tl3];
                     leftTexts.forEach(text => {
                         if(text.trim() !== "") {
+                            // Ustalamy rozmiar fontu bazowego do kalkulacji szerokości belki
+                            const fontSize = Math.round(topLeftHeight * 0.55);
+                            ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
+                            
+                            // ZMIANA: Dynamiczne liczenie szerokości na podstawie tekstu + marginesy boczne
+                            const dynamicLeftWidth = ctx.measureText(text).width + 50;
+
                             ctx.fillStyle = "rgba(8, 22, 43, 0.85)";
                             ctx.beginPath();
-                            ctx.roundRect(topLeftX, topLeftY, topLeftWidth, topLeftHeight, [0, canvas.height * 0.008, canvas.height * 0.008, 0]);
+                            // Zaokrąglenie tylko po prawej stronie (indeksy 1 i 2)
+                            ctx.roundRect(topLeftX, topLeftY, dynamicLeftWidth, topLeftHeight, [0, canvas.height * 0.008, canvas.height * 0.008, 0]);
                             ctx.fill();
 
                             ctx.fillStyle = "#ffffff";
                             ctx.textAlign = "center";
                             ctx.textBaseline = "middle";
                             
-                            let fontSize = Math.round(topLeftHeight * 0.55);
-                            ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
-                            
-                            const maxTextWidth = topLeftWidth - 30; 
-                            while (ctx.measureText(text).width > maxTextWidth && fontSize > 10) {
-                                fontSize--;
-                                ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
-                            }
-                            
-                            ctx.fillText(text, topLeftX + (topLeftWidth / 2), topLeftY + (topLeftHeight / 2));
+                            // Wyrównanie tekstu centralnie wewnątrz wygenerowanej elastycznej belki
+                            ctx.fillText(text, topLeftX + (dynamicLeftWidth / 2), topLeftY + (topLeftHeight / 2));
                             topLeftY += topLeftHeight + topLeftGap;
                         }
                     });
@@ -276,11 +277,11 @@
                     }
 
 
-                    // 5. TRZY PRAWE BELKI FINANSOWE – DUŻE OBNIŻENIE (ZBALANSOWANE)
+                    // 5. TRZY PRAWE BELKI FINANSOWE – KOLEJNE OBNIŻENIE W DÓŁ
                     const badgeHeight = canvas.height * 0.070; 
                     
-                    // ZMIANA: Przesunięcie z 0.48 na 0.55 – likwiduje lukę i przytula sekcję do dołu
-                    let startY = canvas.height * 0.55; 
+                    // ZMIANA: Przesunięcie w dół z 0.55 na 0.59 – idealne wyrównanie asymetrii
+                    let startY = canvas.height * 0.59; 
                     const gap = canvas.height * 0.014;
 
                     const finTexts = [t1, t2, t3];
@@ -309,7 +310,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V22_${file.name}`;
+                    link.download = `MM_CARS_V23_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
