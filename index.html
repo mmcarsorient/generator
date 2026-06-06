@@ -2,11 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v27 (Geometryczna Zgodność Otomoto)</title>
+    <title>MM Cars - Generator Premium v28 (Perfekcyjne wyrównanie i geometria)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Pobieramy czysto geometryczny font Poppins w najgrubszej wersji z kursywą -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap" rel="stylesheet">
+    <!-- Pobieramy Archivo Black - jeden z najpotężniejszych geometrycznych fontów -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
@@ -30,14 +30,14 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v27 (Nowy Font Geometryczny)</h1>
+    <h1>MM Cars - Generator Premium v28 (Korekta Pozycji i Czcionki)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
     <div class="section grid-3">
         <div>
             <label for="dealerInput">Dealer:</label>
-            <input type="text" id="dealerInput" value="MM CARS">
+            <input type="text" id="dealerInput" value="OTOMOTO MM CARS">
         </div>
         <div>
             <label for="brandInput">Środek paska:</label>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- KROK 2: Lewy Górny Róg -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne (Pozycje v23)</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne</h3>
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
             <label for="topLeft1">Rubryka góra 1:</label>
@@ -67,7 +67,7 @@
     </div>
 
     <!-- KROK 3: Prawa krawędź -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie (Pozycje v23)</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie</h3>
     <div class="section grid-3">
         <div>
             <label for="text1">Wyróżnik 1 (Góra):</label>
@@ -176,43 +176,44 @@
                     canvas.width = carImg.width;
                     canvas.height = carImg.height;
 
-                    // 1. Rysowanie tła domyślnego
+                    // 1. Tło
                     ctx.drawImage(carImg, 0, 0);
 
                     const footerHeight = canvas.height * 0.10;
 
-                    // 2. NOWA DOSTOSOWANA STOPKA – PURE GEOMETRIC (POPPINS 900 ITALIC)
+                    // 2. NOWE POZYCJONOWANIE I INTEGRACJA GEOMETRYCZNA STOPKI
+                    ctx.save(); // Zapisujemy stan canvas do transformacji pochylenia
+                    
                     ctx.fillStyle = "#ffffff";
                     
-                    // ZMIANA: Zmiana rodziny fontu na 'Poppins' dla idealnych okręgów i pionowych linii
-                    const finalFontSize = Math.round(footerHeight * 0.35);
-                    ctx.font = `italic 900 ${finalFontSize}px 'Poppins', sans-serif`;
+                    // KOREKTA CZCIONKI: Przechodzimy na ultrawymiarowy Archivo Black / Arial Black
+                    const finalFontSize = Math.round(footerHeight * 0.33);
+                    ctx.font = `${finalFontSize}px 'Archivo Black', 'Arial Black', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // Bezpieczne pozycje wysokości v23
-                    const textYPosition = canvas.height - (footerHeight * 0.16);
+                    // KOREKTA WYSOKOŚCI: Zmieniamy mnożnik z 0.16 na 0.11, aby obniżyć tekst kosmetcznie w dół (wyrównanie do Otomoto na image_01467f.jpg)
+                    const textYPosition = canvas.height - (footerHeight * 0.11);
                     const textXPosition = canvas.width - (canvas.width * 0.07);
                     
-                    // Delikatny, czysty cień (taki jak w Otomoto)
-                    ctx.shadowColor = "rgba(0, 0, 0, 0.35)";
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
                     ctx.shadowBlur = 3;
                     ctx.shadowOffsetX = 1;
                     ctx.shadowOffsetY = 1;
+                    ctx.letterSpacing = "1px";
                     
-                    // Rozstrzelenie znaków
-                    ctx.letterSpacing = "1.5px";
+                    // TRANSFORMCJA POCHYLENIA (SKEW): Symulujemy idealne pochylenie logotypu bez niszczenia geometrii liter O i M
+                    // Parametr -0.15 odpowiada kątowi pochylenia oryginalnego znaku
+                    ctx.transform(1, 0, -0.15, 1, 0, 0);
                     
-                    ctx.fillText(footerText, textXPosition, textYPosition);
+                    // Ponieważ transformacja przesuwa układ współrzędnych, korygujemy punkt wstawienia X
+                    const skewCorrectionX = textYPosition * 0.15;
                     
-                    // Pełny reset parametrów pomocniczych
-                    ctx.letterSpacing = "0px";
-                    ctx.shadowColor = "transparent";
-                    ctx.shadowBlur = 0;
-                    ctx.shadowOffsetX = 0;
-                    ctx.shadowOffsetY = 0;
+                    ctx.fillText(footerText, textXPosition + skewCorrectionX, textYPosition);
+                    
+                    ctx.restore(); // Przywracamy czysty układ dla pozostałych elementów (żeby lewe i prawe belki nie były krzywe!)
 
 
                     // 3. LEWY GÓRNY RÓG (Pozycje v23)
@@ -247,7 +248,8 @@
                     // 4. EMBLEMAT GWARANCJI (Pozycje v23)
                     if(tCapRight !== "") {
                         const badgeGwarHeight = canvas.height * 0.068; 
-                        const badgeGwarY = textYPosition - Math.round(footerHeight * 0.35) - badgeGwarHeight - (canvas.height * 0.005); 
+                        // Pozycja relatywna do bazowej wysokości tekstu dolnego przed obniżeniem, aby zachować dystans
+                        const badgeGwarY = (canvas.height - (footerHeight * 0.16)) - Math.round(footerHeight * 0.35) - badgeGwarHeight - (canvas.height * 0.005); 
                         
                         ctx.font = `900 ${Math.round(badgeGwarHeight * 0.46)}px 'Segoe UI', Arial, sans-serif`;
                         ctx.textBaseline = "middle";
@@ -313,7 +315,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V27_${file.name}`;
+                    link.download = `MM_CARS_V28_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
