@@ -2,11 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v26 (Idealna Kursywa i Spójność)</title>
+    <title>MM Cars - Generator Premium v27 (Geometryczna Zgodność Otomoto)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Pobieramy najgrubszą odmianę Montserrat (900) WRAZ Z KURSYWĄ (900italic) -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap" rel="stylesheet">
+    <!-- Pobieramy czysto geometryczny font Poppins w najgrubszej wersji z kursywą -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
@@ -30,7 +30,7 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v26 (Dynamiczna Kursywa)</h1>
+    <h1>MM Cars - Generator Premium v27 (Nowy Font Geometryczny)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
@@ -181,32 +181,33 @@
 
                     const footerHeight = canvas.height * 0.10;
 
-                    // 2. NAPISY NA DOLE – GRUBA, MOCNA KURSOWA DOSTOSOWANA DO OTOMOTO
+                    // 2. NOWA DOSTOSOWANA STOPKA – PURE GEOMETRIC (POPPINS 900 ITALIC)
                     ctx.fillStyle = "#ffffff";
                     
-                    // ZMIANA: Dodajemy 'italic' oraz wage 900 (Black Italic) z powiększeniem do 0.38
-                    const finalFontSize = Math.round(footerHeight * 0.38);
-                    ctx.font = `italic 900 ${finalFontSize}px 'Montserrat', sans-serif`;
+                    // ZMIANA: Zmiana rodziny fontu na 'Poppins' dla idealnych okręgów i pionowych linii
+                    const finalFontSize = Math.round(footerHeight * 0.35);
+                    ctx.font = `italic 900 ${finalFontSize}px 'Poppins', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // Blokada pozycji na bazie idealnej wersji v23
+                    // Bezpieczne pozycje wysokości v23
                     const textYPosition = canvas.height - (footerHeight * 0.16);
                     const textXPosition = canvas.width - (canvas.width * 0.07);
                     
-                    ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
-                    ctx.shadowBlur = 4;
+                    // Delikatny, czysty cień (taki jak w Otomoto)
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.35)";
+                    ctx.shadowBlur = 3;
                     ctx.shadowOffsetX = 1;
                     ctx.shadowOffsetY = 1;
                     
-                    // Subtelne rozstrzelenie liter dla nowoczesnego, sportowego charakteru
-                    ctx.letterSpacing = "2px";
+                    // Rozstrzelenie znaków
+                    ctx.letterSpacing = "1.5px";
                     
                     ctx.fillText(footerText, textXPosition, textYPosition);
                     
-                    // Reset parametrów po narysowaniu stopki
+                    // Pełny reset parametrów pomocniczych
                     ctx.letterSpacing = "0px";
                     ctx.shadowColor = "transparent";
                     ctx.shadowBlur = 0;
@@ -312,7 +313,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V26_${file.name}`;
+                    link.download = `MM_CARS_V27_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
