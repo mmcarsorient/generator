@@ -2,11 +2,10 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium (Otomoto) v16</title>
-    <!-- Ładowanie czcionki Montserrat z Google Fonts dla idealnego dopasowania do Otomoto -->
+    <title>MM Cars - Generator Premium v17 (Styl Otomoto - Bez tła)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
@@ -30,44 +29,44 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v16 (Dopasowanie do czcionki Otomoto)</h1>
+    <h1>MM Cars - Generator Premium v17 (Wbudowany Styl Otomoto)</h1>
     
-    <!-- KROK 1: Dolny pasek -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">1. Dolny pasek (Czcionka stylizowana na Otomoto, obniżona linia tekstu)</h3>
+    <!-- KROK 1: Dolne napisy -->
+    <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole (Bez tła, czcionka i poziom dopasowane do Otomoto)</h3>
     <div class="section grid-3">
         <div>
             <label for="dealerInput">Dealer:</label>
-            <input type="text" id="dealerInput" value="MM Cars">
+            <input type="text" id="dealerInput" value="MM CARS">
         </div>
         <div>
             <label for="brandInput">Środek paska:</label>
-            <input type="text" id="brandInput" value="Suzuki">
+            <input type="text" id="brandInput" value="SUZUKI">
         </div>
         <div>
             <label for="locationInput">Lokalizacja:</label>
-            <input type="text" id="locationInput" value="Katowice">
+            <input type="text" id="locationInput" value="ZABRZE">
         </div>
     </div>
 
     <!-- KROK 2: Lewy Górny Róg -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Trzy rubryki wyposażenia</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne (Obniżone pod logo portalu)</h3>
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
-            <label for="topLeft1">Rubryka lewa góra 1:</label>
-            <input type="text" id="topLeft1" value="Klimatyzacja 2 strefowa">
+            <label for="topLeft1">Rubryka góra 1:</label>
+            <input type="text" id="topLeft1" value="Klima 2 strefowa">
         </div>
         <div>
-            <label for="topLeft2">Rubryka lewa góra 2:</label>
+            <label for="topLeft2">Rubryka góra 2:</label>
             <input type="text" id="topLeft2" value="Rocznik 2026">
         </div>
         <div>
-            <label for="topLeft3">Rubryka lewa góra 3:</label>
+            <label for="topLeft3">Rubryka góra 3:</label>
             <input type="text" id="topLeft3" value="4 cylindrowy">
         </div>
     </div>
 
     <!-- KROK 3: Prawa krawędź -->
-    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Trzy rubryki finansowe</h3>
+    <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie (Dynamiczna szerokość belek)</h3>
     <div class="section grid-3">
         <div>
             <label for="text1">Wyróżnik 1 (Góra):</label>
@@ -176,41 +175,46 @@
                     canvas.width = carImg.width;
                     canvas.height = carImg.height;
 
-                    // 1. Rysowanie tła (auto)
+                    // 1. Rysowanie tła (czyste auto, brak ciemnego paska)
                     ctx.drawImage(carImg, 0, 0);
 
                     const footerHeight = canvas.height * 0.10;
                     const footerY = canvas.height - footerHeight;
 
-                    // 2. DOLNY PASEK Z GRADIENTEM
-                    const gradient = ctx.createLinearGradient(0, footerY, canvas.width, canvas.height);
-                    gradient.addColorStop(0, "#08162b"); 
-                    gradient.addColorStop(0.5, "#122b54"); 
-                    gradient.addColorStop(1, "#030814"); 
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(0, footerY, canvas.width, footerHeight);
-
+                    // 2. NAPISY NA DOLE W STYLU OTOMOTO (Bez tła)
                     ctx.fillStyle = "#ffffff";
-                    
-                    // ZMIANA CZCIONKI: Zastosowanie geometrycznego 'Montserrat' dla dopasowania do logotypu Otomoto
-                    ctx.font = `900 ${Math.round(footerHeight * 0.40)}px 'Montserrat', sans-serif`;
-                    
-                    // Zmiana wyrównania bazowego na 'alphabetic' dla precyzyjnego pozycjonowania od dołu
+                    ctx.font = `900 ${Math.round(footerHeight * 0.36)}px 'Montserrat', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // OBNIŻENIE PASKA: Przesunięcie tekstu niżej (na wysokość 28% od dołu paska), by zrównać go ze znakiem Otomoto
+                    // Pozycjonowanie wysokości idealnie z linią logo Otomoto
                     const textYPosition = canvas.height - (footerHeight * 0.28);
-                    ctx.fillText(footerText, canvas.width - (canvas.width * 0.04), textYPosition);
+                    // Zwiększony margines boczny z 0.04 na 0.07, aby tekst nie dotykał prawej krawędzi
+                    const textXPosition = canvas.width - (canvas.width * 0.07);
+                    
+                    // Efekt lekkiego cienia tekstowego (Drop Shadow) dla czytelności na jasnych podłożach
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+                    ctx.shadowBlur = 6;
+                    ctx.shadowOffsetX = 2;
+                    ctx.shadowOffsetY = 2;
+                    
+                    ctx.fillText(footerText, textXPosition, textYPosition);
+                    
+                    // Reset cienia dla pozostałych grafik, by nie rozmazywać belek
+                    ctx.shadowColor = "transparent";
+                    ctx.shadowBlur = 0;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
 
 
-                    // 3. LEWY GÓRNY RÓG (Zostaje w Segoe UI dla czytelności danych technicznych)
+                    // 3. LEWY GÓRNY RÓG (Obniżony start pod logo portalu MM Cars Group)
                     const topLeftWidth = canvas.width * 0.25; 
                     const topLeftHeight = canvas.height * 0.062;
                     const topLeftX = 0; 
-                    let topLeftY = canvas.height * 0.15; 
+                    // Zmieniono z 0.15 na 0.23, aby belki zaczynały się bezpiecznie pod logo portalu
+                    let topLeftY = canvas.height * 0.23; 
                     const topLeftGap = canvas.height * 0.012;
 
                     const leftTexts = [tl1, tl2, tl3];
@@ -240,10 +244,9 @@
                     });
 
 
-                    // 4. EMBLEMAT GWARANCJI (Obniżony delikatnie, bliżej dolnego paska)
+                    // 4. EMBLEMAT GWARANCJI (Kompozycja nad "wirtualnym" paskiem)
                     if(tCapRight !== "") {
                         const badgeGwarHeight = canvas.height * 0.068; 
-                        // Zmniejszono margines od dolnego paska z 0.015 na 0.008 dla lepszej kompozycji z obniżonym tekstem
                         const badgeGwarY = footerY - badgeGwarHeight - (canvas.height * 0.008); 
                         
                         ctx.font = `900 ${Math.round(badgeGwarHeight * 0.46)}px 'Segoe UI', Arial, sans-serif`;
@@ -253,7 +256,7 @@
                         const textRightWidth = ctx.measureText(`  ${tCapRight}  `).width + 35;
                         
                         const totalGwarWidth = textLeftWidth + textRightWidth;
-                        const startGwarX = canvas.width - totalGwarWidth - (canvas.width * 0.03); 
+                        const startGwarX = canvas.width - totalGwarWidth - (canvas.width * 0.05); 
 
                         if (kolorKapsuly === "YELLOW") {
                             ctx.fillStyle = "#ebd600"; 
@@ -279,11 +282,8 @@
                     }
 
 
-                    // 5. TRZY PRAWE BELKI FINANSOWE
-                    const badgeWidth = canvas.width * 0.25; 
+                    // 5. TRZY PRAWE BELKI FINANSOWE (Zmienione na RESPONSYWNE / DYNAMICZNE)
                     const badgeHeight = canvas.height * 0.070; 
-                    const startX = canvas.width - badgeWidth; 
-                    
                     let startY = canvas.height * 0.43; 
                     const gap = canvas.height * 0.014;
 
@@ -291,32 +291,33 @@
 
                     finTexts.forEach(text => {
                         if(text.trim() !== "") {
+                            // Wstępne ustawienie czcionki do pomiaru
+                            const fontSize = Math.round(badgeHeight * 0.55);
+                            ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
+                            
+                            // Dynamiczne obliczenie szerokości tła na podstawie długości tekstu (+ elegancki margines boczny)
+                            const dynamicBadgeWidth = ctx.measureText(text).width + 50;
+                            const dynamicStartX = canvas.width - dynamicBadgeWidth;
+
                             ctx.fillStyle = "rgba(8, 22, 43, 0.85)"; 
                             ctx.beginPath();
-                            ctx.roundRect(startX, startY, badgeWidth, badgeHeight, [canvas.height * 0.010, 0, 0, canvas.height * 0.010]);
+                            // Belka przylega do prawej krawędzi, zaokrąglenie tylko z lewej strony
+                            ctx.roundRect(dynamicStartX, startY, dynamicBadgeWidth, badgeHeight, [canvas.height * 0.010, 0, 0, canvas.height * 0.010]);
                             ctx.fill();
 
                             ctx.fillStyle = "#ffffff";
                             ctx.textAlign = "center";
                             ctx.textBaseline = "middle";
-                            
-                            let fontSize = Math.round(badgeHeight * 0.55);
-                            ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
-                            
-                            const maxTextWidth = badgeWidth - 30;
-                            while (ctx.measureText(text).width > maxTextWidth && fontSize > 10) {
-                                fontSize--;
-                                ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
-                            }
 
-                            ctx.fillText(text, startX + (badgeWidth / 2), startY + (badgeHeight / 2));
+                            // Wyśrodkowanie tekstu wewnątrz dynamicznie skrojonej belki
+                            ctx.fillText(text, dynamicStartX + (dynamicBadgeWidth / 2), startY + (badgeHeight / 2));
                             startY += badgeHeight + gap;
                         }
                     });
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V16_${file.name}`;
+                    link.download = `MM_CARS_V17_${file.name}`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
