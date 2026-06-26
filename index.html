@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v32 (Inteligentne kadrowanie proporcji)</title>
+    <title>MM Cars - Generator Premium v33 (Wyrównanie kapsuły do prawej)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Oryginalny Google Roboto Condensed do stopki -->
@@ -30,14 +30,14 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v32 (Zachowanie proporcji auta)</h1>
+    <h1>MM Cars - Generator Premium v33 (Dosunięcie Gwarancji do boku)</h1>
     
     <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
     <div class="section grid-3">
         <div>
             <label for="dealerInput">Dealer:</label>
-            <input type="text" id="dealerInput" value="OTOMOTO MM CARS">
+            <input type="text" id="dealerInput" value="MM CARS">
         </div>
         <div>
             <label for="brandInput">Środek paska:</label>
@@ -54,15 +54,15 @@
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
             <label for="topLeft1">Rubryka góra 1:</label>
-            <input type="text" id="topLeft1" value="Klima 2 strefowa">
+            <input type="text" id="topLeft1" value="NISKA CENA">
         </div>
         <div>
             <label for="topLeft2">Rubryka góra 2:</label>
-            <input type="text" id="topLeft2" value="Rocznik 2026">
+            <input type="text" id="topLeft2" value="4 CYLINDROWY">
         </div>
         <div>
             <label for="topLeft3">Rubryka góra 3:</label>
-            <input type="text" id="topLeft3" value="4 cylindrowy">
+            <input type="text" id="topLeft3" value="">
         </div>
     </div>
 
@@ -71,15 +71,15 @@
     <div class="section grid-3">
         <div>
             <label for="text1">Wyróżnik 1 (Góra):</label>
-            <input type="text" id="text1" value="Kredyt 50/50">
+            <input type="text" id="text1" value="KREDYT 50/50">
         </div>
         <div>
             <label for="text2">Wyróżnik 2 (Środek):</label>
-            <input type="text" id="text2" value="Kredyt 3x33%">
+            <input type="text" id="text2" value="KREDYT 3X33%">
         </div>
         <div>
             <label for="text3">Wyróżnik 3 (Dół):</label>
-            <input type="text" id="text3" value="Leasing 100,2%">
+            <input type="text" id="text3" value="ZAPYTAJ O CERAMIKĘ">
         </div>
     </div>
 
@@ -174,14 +174,13 @@
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     
-                    // Docelowa rozdzielczość na Otomoto
                     const targetWidth = 1024;
                     const targetHeight = 768;
                     canvas.width = targetWidth;
                     canvas.height = targetHeight;
 
-                    // INTELIGENTNE KADROWANIE PROPORCJI (Center Crop)
-                    const targetAspect = targetWidth / targetHeight; // 4:3 czyli 1.333
+                    // CENTER CROP (Znakomite proporcje z v32)
+                    const targetAspect = targetWidth / targetHeight;
                     const imgAspect = carImg.width / carImg.height;
 
                     let sourceX = 0;
@@ -190,22 +189,18 @@
                     let sourceHeight = carImg.height;
 
                     if (imgAspect > targetAspect) {
-                        // Zdjęcie źródłowe jest za szerokie (np. panoramy 16:9) -> ucinamy boki
                         sourceWidth = carImg.height * targetAspect;
                         sourceX = (carImg.width - sourceWidth) / 2;
                     } else if (imgAspect < targetAspect) {
-                        // Zdjęcie źródłowe jest za wąskie/wysokie -> ucinamy górę i dół
                         sourceHeight = carImg.width / targetAspect;
                         sourceY = (carImg.height - sourceHeight) / 2;
                     }
 
-                    // Rysujemy na canvasie idealnie skadrowany środek zdjęcia bez jakichkolwiek zniekształceń proporcji
                     ctx.drawImage(carImg, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, targetWidth, targetHeight);
 
-                    // Od teraz wszystkie elementy premium nakładane są na idealne zdjęcie 1024x768
                     const footerHeight = 76.8; 
 
-                    // 2. STYLIZACJA STOPKI (Roboto Condensed Black)
+                    // 2. STYLIZACJA STOPKI
                     ctx.save(); 
                     ctx.fillStyle = "#ffffff";
                     
@@ -262,10 +257,10 @@
                     });
 
 
-                    // 4. EMBLEMAT GWARANCJI
+                    // 4. EMBLEMAT GWARANCJI (ZMIANA: Przesunięty całkowicie do prawej krawędzi)
                     if(tCapRight !== "") {
                         const badgeGwarHeight = 52; 
-                        const badgeGwarY = 768 - 76.8 - 52 - 4; 
+                        const badgeGwarY = 768 - 76.8 - 52 - 4; // Tuż nad dolnymi napisami
                         
                         ctx.font = `900 24px 'Segoe UI', Arial, sans-serif`;
                         ctx.textBaseline = "middle";
@@ -274,7 +269,9 @@
                         const textRightWidth = ctx.measureText(`  ${tCapRight}  `).width + 35;
                         
                         const totalGwarWidth = textLeftWidth + textRightWidth;
-                        const startGwarX = 1024 - totalGwarWidth - 51; 
+                        
+                        // KLUCZOWA POPRAWKA: StartX ustawiony na sztywno, by prawa zaokrąglona krawędź dotykała krawędzi zdjęcia (1024)
+                        const startGwarX = 1024 - totalGwarWidth; 
 
                         if (kolorKapsuly === "YELLOW") {
                             ctx.fillStyle = "#ebd600"; 
@@ -283,6 +280,7 @@
                         }
                         
                         ctx.beginPath();
+                        // Tylko lewa krawędź żółtego tła jest zaokrąglona
                         ctx.roundRect(startGwarX, badgeGwarY, textLeftWidth + 15, badgeGwarHeight, [badgeGwarHeight/2, 0, 0, badgeGwarHeight/2]);
                         ctx.fill();
 
@@ -292,7 +290,8 @@
 
                         ctx.fillStyle = "#0a0a0a";
                         ctx.beginPath();
-                        ctx.roundRect(startGwarX + textLeftWidth, badgeGwarY, textRightWidth, badgeGwarHeight, [0, badgeGwarHeight/2, badgeGwarHeight/2, 0]);
+                        // Prawa krawędź czarnego tła jest teraz prosta (0), idealnie pasując do marginesu ekranu
+                        ctx.roundRect(startGwarX + textLeftWidth, badgeGwarY, textRightWidth, badgeGwarHeight, [0, 0, 0, 0]);
                         ctx.fill();
 
                         ctx.fillStyle = "#ffffff";
@@ -331,7 +330,7 @@
 
                     // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_CROP_${file.name.split('.')[0]}.jpg`;
+                    link.download = `MM_CARS_V33_${file.name.split('.')[0]}.jpg`;
                     link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
