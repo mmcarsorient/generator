@@ -2,9 +2,10 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v31 (Stała rozdzielczość 1024x768)</title>
+    <title>MM Cars - Generator Premium v32 (Inteligentne kadrowanie proporcji)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Oryginalny Google Roboto Condensed do stopki -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@900&display=swap" rel="stylesheet">
     
     <style>
@@ -29,8 +30,9 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v31 (Auto-skalowanie 1024x768)</h1>
+    <h1>MM Cars - Generator Premium v32 (Zachowanie proporcji auta)</h1>
     
+    <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
     <div class="section grid-3">
         <div>
@@ -47,6 +49,7 @@
         </div>
     </div>
 
+    <!-- KROK 2: Lewy Górny Róg -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne</h3>
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
@@ -63,6 +66,7 @@
         </div>
     </div>
 
+    <!-- KROK 3: Prawa krawędź -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie</h3>
     <div class="section grid-3">
         <div>
@@ -79,6 +83,7 @@
         </div>
     </div>
 
+    <!-- KROK 4: Kapsuła Gwarancji -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">4. Kapsuła Gwarancyjna</h3>
     <div class="section grid-3">
         <div>
@@ -98,6 +103,7 @@
         </div>
     </div>
 
+    <!-- KROK 5: Pliki -->
     <div class="section">
         <label>5. Wgraj zdjęcia samochodów:</label>
         <div class="file-upload" onclick="document.getElementById('fileInput').click()">
@@ -168,29 +174,49 @@
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     
-                    // ZMIANA KLUCZOWA: Wymuszamy stałe wymiary robocze dla każdego zdjęcia, niezależnie od pliku źródłowego
-                    canvas.width = 1024;
-                    canvas.height = 768;
+                    // Docelowa rozdzielczość na Otomoto
+                    const targetWidth = 1024;
+                    const targetHeight = 768;
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
 
-                    // Rysujemy wgrane zdjęcie rozciągając / pasując je automatycznie do sztywnej siatki 1024x768
-                    ctx.drawImage(carImg, 0, 0, 1024, 768);
+                    // INTELIGENTNE KADROWANIE PROPORCJI (Center Crop)
+                    const targetAspect = targetWidth / targetHeight; // 4:3 czyli 1.333
+                    const imgAspect = carImg.width / carImg.height;
 
-                    // Od teraz stałe bazowe wyliczone idealnie dla rozdzielczości 1024x768
+                    let sourceX = 0;
+                    let sourceY = 0;
+                    let sourceWidth = carImg.width;
+                    let sourceHeight = carImg.height;
+
+                    if (imgAspect > targetAspect) {
+                        // Zdjęcie źródłowe jest za szerokie (np. panoramy 16:9) -> ucinamy boki
+                        sourceWidth = carImg.height * targetAspect;
+                        sourceX = (carImg.width - sourceWidth) / 2;
+                    } else if (imgAspect < targetAspect) {
+                        // Zdjęcie źródłowe jest za wąskie/wysokie -> ucinamy górę i dół
+                        sourceHeight = carImg.width / targetAspect;
+                        sourceY = (carImg.height - sourceHeight) / 2;
+                    }
+
+                    // Rysujemy na canvasie idealnie skadrowany środek zdjęcia bez jakichkolwiek zniekształceń proporcji
+                    ctx.drawImage(carImg, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, targetWidth, targetHeight);
+
+                    // Od teraz wszystkie elementy premium nakładane są na idealne zdjęcie 1024x768
                     const footerHeight = 76.8; 
 
                     // 2. STYLIZACJA STOPKI (Roboto Condensed Black)
                     ctx.save(); 
                     ctx.fillStyle = "#ffffff";
                     
-                    const finalFontSize = 27; // Stały, zoptymalizowany rozmiar czcionki w pikselach
+                    const finalFontSize = 27; 
                     ctx.font = `900 ${finalFontSize}px 'Roboto Condensed', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // Sztywne pozycjonowanie osi Y i X dla rozdzielczości 1024
-                    const textYPosition = 768 - 8.5; // Zapewnia idealną wysokość dopasowaną do Otomoto
+                    const textYPosition = 768 - 8.5; 
                     const textXPosition = 1024 - 71;
                     
                     ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
@@ -303,10 +329,10 @@
                         }
                     });
 
-                    // 6. Eksport pliku w doskonałej wadze i kompresji
+                    // 6. Eksport pliku
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_1024x768_${file.name.split('.')[0]}.jpg`;
-                    link.href = canvas.toDataURL('image/jpeg', 0.92);
+                    link.download = `MM_CARS_CROP_${file.name.split('.')[0]}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.94);
                     link.click();
                 };
             };
