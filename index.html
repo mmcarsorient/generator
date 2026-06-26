@@ -2,11 +2,10 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>MM Cars - Generator Premium v30 (Oficjalny Roboto Condensed)</title>
+    <title>MM Cars - Generator Premium v31 (Stała rozdzielczość 1024x768)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Importujemy oryginalny Google Roboto Condensed w najwyższej grubości 900 (Black) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
@@ -30,9 +29,8 @@
 <body>
 
 <div class="container">
-    <h1>MM Cars - Generator Premium v30 (Baza: Roboto Condensed)</h1>
+    <h1>MM Cars - Generator Premium v31 (Auto-skalowanie 1024x768)</h1>
     
-    <!-- KROK 1: Dolne napisy -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">1. Napisy na dole</h3>
     <div class="section grid-3">
         <div>
@@ -49,7 +47,6 @@
         </div>
     </div>
 
-    <!-- KROK 2: Lewy Górny Róg -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">2. Lewy Górny Róg - Dane techniczne</h3>
     <div class="section grid-3" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
         <div>
@@ -66,7 +63,6 @@
         </div>
     </div>
 
-    <!-- KROK 3: Prawa krawędź -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">3. Prawa krawędź - Finansowanie</h3>
     <div class="section grid-3">
         <div>
@@ -83,7 +79,6 @@
         </div>
     </div>
 
-    <!-- KROK 4: Kapsuła Gwarancji -->
     <h3 style="color: #1e293b; margin-bottom: 10px;">4. Kapsuła Gwarancyjna</h3>
     <div class="section grid-3">
         <div>
@@ -103,7 +98,6 @@
         </div>
     </div>
 
-    <!-- KROK 5: Pliki -->
     <div class="section">
         <label>5. Wgraj zdjęcia samochodów:</label>
         <div class="file-upload" onclick="document.getElementById('fileInput').click()">
@@ -173,38 +167,38 @@
                 carImg.onload = function() {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    canvas.width = carImg.width;
-                    canvas.height = carImg.height;
-
-                    // 1. Tło
-                    ctx.drawImage(carImg, 0, 0);
-
-                    const footerHeight = canvas.height * 0.10;
-
-                    // 2. STYLIZACJA STOPKI - ZASTOSOWANIE ROBOTO CONDENSED BLACK
-                    ctx.save(); 
                     
+                    // ZMIANA KLUCZOWA: Wymuszamy stałe wymiary robocze dla każdego zdjęcia, niezależnie od pliku źródłowego
+                    canvas.width = 1024;
+                    canvas.height = 768;
+
+                    // Rysujemy wgrane zdjęcie rozciągając / pasując je automatycznie do sztywnej siatki 1024x768
+                    ctx.drawImage(carImg, 0, 0, 1024, 768);
+
+                    // Od teraz stałe bazowe wyliczone idealnie dla rozdzielczości 1024x768
+                    const footerHeight = 76.8; 
+
+                    // 2. STYLIZACJA STOPKI (Roboto Condensed Black)
+                    ctx.save(); 
                     ctx.fillStyle = "#ffffff";
                     
-                    // Używamy Roboto Condensed o wadze 900 (Black)
-                    const finalFontSize = Math.round(footerHeight * 0.35); // Delikatnie zwiększony mnożnik, bo kondensowane fonty optycznie potrzebują skali
+                    const finalFontSize = 27; // Stały, zoptymalizowany rozmiar czcionki w pikselach
                     ctx.font = `900 ${finalFontSize}px 'Roboto Condensed', sans-serif`;
                     ctx.textBaseline = "alphabetic";
                     ctx.textAlign = "right"; 
                     
                     const footerText = `${dealer}        ${markaPasek}        ${miasto}`;
                     
-                    // Dokładne pozycjonowanie osi Y dopasowane do dołu portalu
-                    const textYPosition = canvas.height - (footerHeight * 0.11);
-                    const textXPosition = canvas.width - (canvas.width * 0.07);
+                    // Sztywne pozycjonowanie osi Y i X dla rozdzielczości 1024
+                    const textYPosition = 768 - 8.5; // Zapewnia idealną wysokość dopasowaną do Otomoto
+                    const textXPosition = 1024 - 71;
                     
                     ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
                     ctx.shadowBlur = 3;
                     ctx.shadowOffsetX = 1;
                     ctx.shadowOffsetY = 1;
-                    ctx.letterSpacing = "2px"; // Dodajemy charakterystyczny rozstaw znany z portalu
+                    ctx.letterSpacing = "2px"; 
                     
-                    // Pochylenie matematyczne (skew) o wektor -0.15 dający idealny kąt pochylenia
                     ctx.transform(1, 0, -0.15, 1, 0, 0);
                     
                     const skewCorrectionX = textYPosition * 0.15;
@@ -214,22 +208,22 @@
 
 
                     // 3. LEWY GÓRNY RÓG
-                    const topLeftHeight = canvas.height * 0.062;
+                    const topLeftHeight = 48;
                     const topLeftX = 0; 
-                    let topLeftY = canvas.height * 0.14; 
-                    const topLeftGap = canvas.height * 0.012;
+                    let topLeftY = 107; 
+                    const topLeftGap = 9;
 
                     const leftTexts = [tl1, tl2, tl3];
                     leftTexts.forEach(text => {
                         if(text.trim() !== "") {
-                            const fontSize = Math.round(topLeftHeight * 0.55);
+                            const fontSize = 26;
                             ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
                             
                             const dynamicLeftWidth = ctx.measureText(text).width + 50;
 
                             ctx.fillStyle = "rgba(8, 22, 43, 0.85)";
                             ctx.beginPath();
-                            ctx.roundRect(topLeftX, topLeftY, dynamicLeftWidth, topLeftHeight, [0, canvas.height * 0.008, canvas.height * 0.008, 0]);
+                            ctx.roundRect(topLeftX, topLeftY, dynamicLeftWidth, topLeftHeight, [0, 6, 6, 0]);
                             ctx.fill();
 
                             ctx.fillStyle = "#ffffff";
@@ -244,17 +238,17 @@
 
                     // 4. EMBLEMAT GWARANCJI
                     if(tCapRight !== "") {
-                        const badgeGwarHeight = canvas.height * 0.068; 
-                        const badgeGwarY = (canvas.height - (footerHeight * 0.16)) - Math.round(footerHeight * 0.35) - badgeGwarHeight - (canvas.height * 0.005); 
+                        const badgeGwarHeight = 52; 
+                        const badgeGwarY = 768 - 76.8 - 52 - 4; 
                         
-                        ctx.font = `900 ${Math.round(badgeGwarHeight * 0.46)}px 'Segoe UI', Arial, sans-serif`;
+                        ctx.font = `900 24px 'Segoe UI', Arial, sans-serif`;
                         ctx.textBaseline = "middle";
                         
                         const textLeftWidth = ctx.measureText(`  ${tCapLeft}  `).width + 30;
                         const textRightWidth = ctx.measureText(`  ${tCapRight}  `).width + 35;
                         
                         const totalGwarWidth = textLeftWidth + textRightWidth;
-                        const startGwarX = canvas.width - totalGwarWidth - (canvas.width * 0.05); 
+                        const startGwarX = 1024 - totalGwarWidth - 51; 
 
                         if (kolorKapsuly === "YELLOW") {
                             ctx.fillStyle = "#ebd600"; 
@@ -281,23 +275,23 @@
 
 
                     // 5. TRZY PRAWE BELKI FINANSOWE
-                    const badgeHeight = canvas.height * 0.070; 
-                    let startY = canvas.height * 0.55; 
-                    const gap = canvas.height * 0.014;
+                    const badgeHeight = 54; 
+                    let startY = 422; 
+                    const gap = 11;
 
                     const finTexts = [t1, t2, t3];
 
                     finTexts.forEach(text => {
                         if(text.trim() !== "") {
-                            const fontSize = Math.round(badgeHeight * 0.55);
+                            const fontSize = 30;
                             ctx.font = `900 ${fontSize}px 'Segoe UI', Arial, sans-serif`;
                             
                             const dynamicBadgeWidth = ctx.measureText(text).width + 50;
-                            const dynamicStartX = canvas.width - dynamicBadgeWidth;
+                            const dynamicStartX = 1024 - dynamicBadgeWidth;
 
                             ctx.fillStyle = "rgba(8, 22, 43, 0.85)"; 
                             ctx.beginPath();
-                            ctx.roundRect(dynamicStartX, startY, dynamicBadgeWidth, badgeHeight, [canvas.height * 0.010, 0, 0, canvas.height * 0.010]);
+                            ctx.roundRect(dynamicStartX, startY, dynamicBadgeWidth, badgeHeight, [10, 0, 0, 10]);
                             ctx.fill();
 
                             ctx.fillStyle = "#ffffff";
@@ -309,10 +303,10 @@
                         }
                     });
 
-                    // 6. Eksport pliku
+                    // 6. Eksport pliku w doskonałej wadze i kompresji
                     const link = document.createElement('a');
-                    link.download = `MM_CARS_V30_${file.name}`;
-                    link.href = canvas.toDataURL('image/jpeg', 0.94);
+                    link.download = `MM_CARS_1024x768_${file.name.split('.')[0]}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.92);
                     link.click();
                 };
             };
